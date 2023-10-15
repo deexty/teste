@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exemplo de Requisição GET em HTML</title>
+</head>
+<body>
+    <div id="resultado"></div>
+    <img src="" id="imagemteste">
+    <script>
+        /* const fileinput = document.getElementById("fileinput")
+
+        fileinput.addEventListener("change", (e) => {
+            const file = fileinput.files[0]
+            const reader = new FileReader();
+
+            reader.addEventListener("load", () => {
+                console.log(reader.result);
+            })
+
+            reader.readAsDataURL(file)
+        })
+        
+        
+        console.log(fileinput); */
+
+        function requisicaoGet() {
+            var request = new XMLHttpRequest();
+            request.open('GET', 'https://portifolio-api-seven.vercel.app/projetos', true);
+
+            request.onload = function () {
+                if (request.status >= 200 && request.status < 400) {
+                    // Sucesso!
+                    var data = JSON.parse(request.responseText);
+                    console.log(data);
+                    const imagem = document.getElementById("imagemteste")
+                    imagem.setAttribute("src", data[0].image)
+
+                } else {
+                    // Houve um erro durante a requisição
+                    console.error('Erro ao realizar a requisição.');
+                }
+            };
+
+            request.onerror = function () {
+                // Houveram erros de conexão
+                console.error('Erro de conexão.');
+            };
+
+            request.send();
+        }
+
+        requisicaoGet();
+
+    </script>
+</body>
+</html>
